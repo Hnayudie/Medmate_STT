@@ -3,18 +3,40 @@
   "loginTitle": "Welcome Back",
   "loginSubtitle": "Sign in to continue using MedMate STT",
   "registerTitle": "Create Account",
-  "registerSubtitle": "Sign up to start your medical workflow",
-  "username": "Username",
+  "registerSubtitle": "Join MedMate to start your medical workflow",
+  "phoneNumberEmail": "Phone Number / Email",
+  "enterPhoneEmail": "Enter your phone or email",
   "password": "Password",
+  "enterPassword": "Enter your password",
   "confirmPassword": "Confirm Password",
   "fullName": "Full Name",
+  "enterFullName": "Enter your full name",
   "email": "Email",
-  "login": "Login",
+  "createPassword": "Create a password",
+  "reEnterPassword": "Re-enter your password",
+  "signIn": "Sign In",
+  "signUp": "Sign Up",
   "register": "Register",
-  "noAccount": "Don't have an account?",
-  "backToLogin": "Back to login",
+  "rememberMe": "Remember Me",
+  "forgotPassword": "Forgot Password?",
+  "dontHaveAccount": "Don't have an account?",
+  "alreadyHaveAccount": "Already have an account?",
+  "backToLogin": "Sign In",
   "requiredField": "This field is required",
-  "passwordMismatch": "Password does not match",
-  "loginSuccess": "Login success",
-  "registerSuccess": "Register success"
+  "passwordMismatch": "Passwords do not match",
+  "appTagline": "Medical Speech-to-Text",
+  "hipaaCompliant": "HIPAA Compliant · 256-bit Encrypted",
+  "languageName": "English",
+  "loginWelcome": "Welcome, {name}",
+  "@loginWelcome": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "registerWelcome": "Account created! Welcome, {name}",
+  "@registerWelcome": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  }
 }

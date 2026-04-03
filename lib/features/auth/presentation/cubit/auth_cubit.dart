@@ -55,6 +55,12 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  void clearError() {
+    if (state.status == AuthStatus.failure) {
+      emit(state.copyWith(status: AuthStatus.initial, errorMessage: null));
+    }
+  }
+
   void reset() {
     emit(const AuthState());
   }

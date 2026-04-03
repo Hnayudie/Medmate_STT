@@ -1,0 +1,19 @@
+---
+globs: kiot-qr-mobile-app/assets/**,kiot-qr-mobile-app/lib/src/generated/**
+description: Assets and localization conventions for the Flutter app
+---
+## Assets and localization
+
+- **Assets**
+  - Centralized at: [kiot-qr-mobile-app/assets](mdc:kiot-qr-mobile-app/assets)
+  - Common subfolders: `images/`, `icons/`, `audio/`, `json/`, `ic_launcher/`
+  - Ensure assets are declared in the app's `pubspec.yaml`.
+
+- **Localization**
+  - ARB sources: [kiot-qr-mobile-app/assets/l10n](mdc:kiot-qr-mobile-app/assets/l10n)
+  - Generated Dart code: [kiot-qr-mobile-app/lib/src/generated](mdc:kiot-qr-mobile-app/lib/src/generated)
+  - Prefer using the generated localization accessors within the `presentation` layer.
+
+- **iOS specific**
+  - Notification and Widget extensions are under: [kiot-qr-mobile-app/ios](mdc:kiot-qr-mobile-app/ios)
+

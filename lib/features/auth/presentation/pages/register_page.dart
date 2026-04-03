@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:medmate_stt/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:medmate_stt/features/auth/presentation/cubit/auth_state.dart';
 import 'package:medmate_stt/features/auth/presentation/viewmodel/register_view_model.dart';
 import 'package:medmate_stt/features/auth/presentation/widgets/auth_screen_scaffold.dart';
-
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -20,6 +19,8 @@ class _RegisterPageState extends State<RegisterPage> {
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
 
   @override
   void dispose() {
@@ -38,7 +39,9 @@ class _RegisterPageState extends State<RegisterPage> {
       listener: (context, state) {
         if (state.status == AuthStatus.success && state.data != null) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('${l10n.registerSuccess}: ${state.data!.fullName}')),
+            SnackBar(
+              content: Text(l10n.registerWelcome(state.data!.fullName)),
+            ),
           );
           context.read<AuthCubit>().reset();
           Navigator.of(context).pop();
@@ -47,98 +50,203 @@ class _RegisterPageState extends State<RegisterPage> {
       builder: (context, state) {
         final vm = RegisterViewModel.fromState(state);
         return AuthScreenScaffold(
-          title: l10n.registerTitle,
-          subtitle: l10n.registerSubtitle,
+          showBackButton: true,
+          logoStyle: LogoStyle.iconOnly,
           child: Form(
             key: _formKey,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                // Section header
+                Text(
+                  l10n.registerTitle,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  l10n.registerSubtitle,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Theme.of(context).colorScheme.outline,
+                  ),
+                ),
+                const SizedBox(height: 24),
+
+                // Full Name
+                _FieldLabel(l10n.fullName),
+                const SizedBox(height: 6),
                 TextFormField(
                   controller: _fullNameController,
-                  decoration: InputDecoration(labelText: l10n.fullName),
-                  validator:
-                      (value) =>
-                          (value == null || value.trim().isEmpty)
-                              ? l10n.requiredField
-                              : null,
+                  textCapitalization: TextCapitalization.words,
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(hintText: l10n.enterFullName),
+                  onChanged: (_) => context.read<AuthCubit>().clearError(),
+                  validator: (v) =>
+                      (v == null || v.trim().isEmpty) ? l10n.requiredField : null,
                 ),
                 const SizedBox(height: 14),
+
+                // Phone / Email
+                _FieldLabel(l10n.phoneNumberEmail),
+                const SizedBox(height: 6),
                 TextFormField(
                   controller: _emailController,
-                  decoration: InputDecoration(labelText: l10n.email),
-                  validator:
-                      (value) =>
-                          (value == null || value.trim().isEmpty)
-                              ? l10n.requiredField
-                              : null,
+                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(hintText: l10n.enterPhoneEmail),
+                  onChanged: (_) => context.read<AuthCubit>().clearError(),
+                  validator: (v) =>
+                      (v == null || v.trim().isEmpty) ? l10n.requiredField : null,
                 ),
                 const SizedBox(height: 14),
+
+                // Password
+                _FieldLabel(l10n.password),
+                const SizedBox(height: 6),
                 TextFormField(
                   controller: _passwordController,
-                  obscureText: true,
-                  decoration: InputDecoration(labelText: l10n.password),
-                  validator:
-                      (value) =>
-                          (value == null || value.isEmpty)
-                              ? l10n.requiredField
-                              : null,
+                  obscureText: _obscurePassword,
+                  textInputAction: TextInputAction.next,
+                  onChanged: (_) => context.read<AuthCubit>().clearError(),
+                  decoration: InputDecoration(
+                    hintText: l10n.createPassword,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscurePassword
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                        size: 20,
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                      onPressed: () =>
+                          setState(() => _obscurePassword = !_obscurePassword),
+                    ),
+                  ),
+                  validator: (v) =>
+                      (v == null || v.isEmpty) ? l10n.requiredField : null,
                 ),
                 const SizedBox(height: 14),
+
+                // Confirm Password
+                _FieldLabel(l10n.confirmPassword),
+                const SizedBox(height: 6),
                 TextFormField(
                   controller: _confirmPasswordController,
-                  obscureText: true,
-                  decoration: InputDecoration(labelText: l10n.confirmPassword),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) return l10n.requiredField;
-                    if (value != _passwordController.text) {
-                      return l10n.passwordMismatch;
-                    }
+                  obscureText: _obscureConfirmPassword,
+                  textInputAction: TextInputAction.done,
+                  onChanged: (_) => context.read<AuthCubit>().clearError(),
+                  decoration: InputDecoration(
+                    hintText: l10n.reEnterPassword,
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _obscureConfirmPassword
+                            ? Icons.visibility_off_outlined
+                            : Icons.visibility_outlined,
+                        size: 20,
+                        color: Theme.of(context).colorScheme.outline,
+                      ),
+                      onPressed: () => setState(
+                          () => _obscureConfirmPassword = !_obscureConfirmPassword),
+                    ),
+                  ),
+                  validator: (v) {
+                    if (v == null || v.isEmpty) return l10n.requiredField;
+                    if (v != _passwordController.text) return l10n.passwordMismatch;
                     return null;
                   },
                 ),
-                const SizedBox(height: 16),
-                if (vm.errorText != null)
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: Text(
-                      vm.errorText!,
-                      style: TextStyle(color: Theme.of(context).colorScheme.error),
-                    ),
+
+                // API error
+                if (vm.errorText != null) ...[
+                  const SizedBox(height: 8),
+                  Text(
+                    vm.errorText!,
+                    style: const TextStyle(color: Color(0xFFDC2626), fontSize: 13),
                   ),
+                ],
+
+                const SizedBox(height: 24),
+
+                // Create Account button
                 FilledButton(
-                  onPressed:
-                      vm.isLoading
-                          ? null
-                          : () {
-                            if (_formKey.currentState?.validate() ?? false) {
-                              context.read<AuthCubit>().register(
-                                fullName: _fullNameController.text,
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                                confirmPassword: _confirmPasswordController.text,
-                              );
-                            }
-                          },
-                  child:
-                      vm.isLoading
-                          ? const SizedBox(
-                            height: 18,
-                            width: 18,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          )
-                          : Text(l10n.register),
+                  onPressed: vm.isLoading
+                      ? null
+                      : () {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            context.read<AuthCubit>().register(
+                                  fullName: _fullNameController.text.trim(),
+                                  email: _emailController.text.trim(),
+                                  password: _passwordController.text,
+                                  confirmPassword: _confirmPasswordController.text,
+                                );
+                          }
+                        },
+                  child: vm.isLoading
+                      ? const SizedBox(
+                          height: 20,
+                          width: 20,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: Colors.white,
+                          ),
+                        )
+                      : Text(l10n.registerTitle),
                 ),
-                const SizedBox(height: 12),
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(),
-                  child: Text(l10n.backToLogin),
+
+                const SizedBox(height: 16),
+
+                // Back to login
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      '${l10n.alreadyHaveAccount} ',
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                    GestureDetector(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: Text(
+                        l10n.backToLogin,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFF219EBC),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
         );
       },
+    );
+  }
+}
+
+class _FieldLabel extends StatelessWidget {
+  const _FieldLabel(this.label);
+
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      label,
+      style: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: Theme.of(context).colorScheme.onSurface,
+      ),
     );
   }
 }

@@ -8,6 +8,7 @@ import 'package:medmate_stt/features/auth/domain/usecases/login_usecase.dart';
 import 'package:medmate_stt/features/auth/domain/usecases/register_usecase.dart';
 import 'package:medmate_stt/features/auth/presentation/cubit/auth_cubit.dart';
 import 'package:medmate_stt/features/auth/presentation/pages/login_page.dart';
+import 'package:medmate_stt/features/locale/locale_cubit.dart';
 import 'package:medmate_stt/features/theme/theme_cubit.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -20,12 +21,12 @@ void runMedMateApp() {
     MultiBlocProvider(
       providers: [
         BlocProvider(create: (_) => ThemeCubit()),
+        BlocProvider(create: (_) => LocaleCubit()),
         BlocProvider(
-          create:
-              (_) => AuthCubit(
-                loginUseCase: LoginUseCase(repository: repository),
-                registerUseCase: RegisterUseCase(repository: repository),
-              ),
+          create: (_) => AuthCubit(
+            loginUseCase: LoginUseCase(repository: repository),
+            registerUseCase: RegisterUseCase(repository: repository),
+          ),
         ),
       ],
       child: const MedMateApp(),
@@ -40,20 +41,25 @@ class MedMateApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeMode>(
       builder: (context, themeMode) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          title: 'MedMate STT',
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
-          themeMode: themeMode,
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: AppLocalizations.supportedLocales,
-          home: const LoginPage(),
+        return BlocBuilder<LocaleCubit, Locale>(
+          builder: (context, locale) {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              title: 'MedMate STT',
+              theme: AppTheme.lightTheme,
+              darkTheme: AppTheme.darkTheme,
+              themeMode: themeMode,
+              locale: locale,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: AppLocalizations.supportedLocales,
+              home: const LoginPage(),
+            );
+          },
         );
       },
     );

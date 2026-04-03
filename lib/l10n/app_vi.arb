@@ -1,20 +1,42 @@
 {
   "@@locale": "vi",
-  "loginTitle": "Chao mung tro lai",
-  "loginSubtitle": "Dang nhap de tiep tuc su dung MedMate STT",
-  "registerTitle": "Tao tai khoan",
-  "registerSubtitle": "Dang ky de bat dau quy trinh y te",
-  "username": "Ten dang nhap",
-  "password": "Mat khau",
-  "confirmPassword": "Xac nhan mat khau",
-  "fullName": "Ho va ten",
+  "loginTitle": "Chào Mừng Trở Lại",
+  "loginSubtitle": "Đăng nhập để tiếp tục sử dụng MedMate STT",
+  "registerTitle": "Tạo Tài Khoản",
+  "registerSubtitle": "Tham gia MedMate để bắt đầu quy trình y tế",
+  "phoneNumberEmail": "Số điện thoại / Email",
+  "enterPhoneEmail": "Nhập số điện thoại hoặc email",
+  "password": "Mật khẩu",
+  "enterPassword": "Nhập mật khẩu",
+  "confirmPassword": "Xác nhận mật khẩu",
+  "fullName": "Họ và tên",
+  "enterFullName": "Nhập họ và tên",
   "email": "Email",
-  "login": "Dang nhap",
-  "register": "Dang ky",
-  "noAccount": "Chua co tai khoan?",
-  "backToLogin": "Quay lai dang nhap",
-  "requiredField": "Truong nay la bat buoc",
-  "passwordMismatch": "Mat khau khong khop",
-  "loginSuccess": "Dang nhap thanh cong",
-  "registerSuccess": "Dang ky thanh cong"
+  "createPassword": "Tạo mật khẩu",
+  "reEnterPassword": "Nhập lại mật khẩu",
+  "signIn": "Đăng Nhập",
+  "signUp": "Đăng Ký",
+  "register": "Đăng ký",
+  "rememberMe": "Ghi nhớ đăng nhập",
+  "forgotPassword": "Quên mật khẩu?",
+  "dontHaveAccount": "Chưa có tài khoản?",
+  "alreadyHaveAccount": "Đã có tài khoản?",
+  "backToLogin": "Đăng Nhập",
+  "requiredField": "Trường này là bắt buộc",
+  "passwordMismatch": "Mật khẩu không khớp",
+  "appTagline": "Nhận dạng giọng nói y tế",
+  "hipaaCompliant": "Tuân thủ HIPAA · Mã hóa 256-bit",
+  "languageName": "Tiếng Việt",
+  "loginWelcome": "Chào mừng, {name}",
+  "@loginWelcome": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "registerWelcome": "Tạo tài khoản thành công! Chào mừng, {name}",
+  "@registerWelcome": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  }
 }
