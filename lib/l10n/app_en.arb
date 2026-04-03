@@ -1,0 +1,20 @@
+{
+  "@@locale": "en",
+  "loginTitle": "Welcome Back",
+  "loginSubtitle": "Sign in to continue using MedMate STT",
+  "registerTitle": "Create Account",
+  "registerSubtitle": "Sign up to start your medical workflow",
+  "username": "Username",
+  "password": "Password",
+  "confirmPassword": "Confirm Password",
+  "fullName": "Full Name",
+  "email": "Email",
+  "login": "Login",
+  "register": "Register",
+  "noAccount": "Don't have an account?",
+  "backToLogin": "Back to login",
+  "requiredField": "This field is required",
+  "passwordMismatch": "Password does not match",
+  "loginSuccess": "Login success",
+  "registerSuccess": "Register success"
+}

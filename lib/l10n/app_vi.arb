@@ -1,0 +1,20 @@
+{
+  "@@locale": "vi",
+  "loginTitle": "Chao mung tro lai",
+  "loginSubtitle": "Dang nhap de tiep tuc su dung MedMate STT",
+  "registerTitle": "Tao tai khoan",
+  "registerSubtitle": "Dang ky de bat dau quy trinh y te",
+  "username": "Ten dang nhap",
+  "password": "Mat khau",
+  "confirmPassword": "Xac nhan mat khau",
+  "fullName": "Ho va ten",
+  "email": "Email",
+  "login": "Dang nhap",
+  "register": "Dang ky",
+  "noAccount": "Chua co tai khoan?",
+  "backToLogin": "Quay lai dang nhap",
+  "requiredField": "Truong nay la bat buoc",
+  "passwordMismatch": "Mat khau khong khop",
+  "loginSuccess": "Dang nhap thanh cong",
+  "registerSuccess": "Dang ky thanh cong"
+}

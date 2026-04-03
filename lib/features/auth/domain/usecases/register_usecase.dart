@@ -1,0 +1,14 @@
+import 'package:medmate_stt/features/auth/domain/entities/auth_response.dart';
+import 'package:medmate_stt/features/auth/domain/entities/register_request.dart';
+import 'package:medmate_stt/features/auth/domain/repositories/auth_repository.dart';
+
+class RegisterUseCase {
+  const RegisterUseCase({required AuthRepository repository})
+    : _repository = repository;
+
+  final AuthRepository _repository;
+
+  Future<AuthResponse> call(RegisterRequest request) {
+    return _repository.register(request);
+  }
+}
