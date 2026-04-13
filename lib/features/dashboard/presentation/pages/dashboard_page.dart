@@ -66,8 +66,8 @@ class _DashboardPageState extends State<DashboardPage> {
           SliverAppBar(
             pinned: true,
             expandedHeight: 160,
-            backgroundColor: colorScheme.surface,
-            surfaceTintColor: colorScheme.surface,
+            backgroundColor: colorScheme.surfaceContainerLowest,
+            surfaceTintColor: colorScheme.surfaceContainerLowest,
             elevation: 0,
             scrolledUnderElevation: 1,
             automaticallyImplyLeading: false,

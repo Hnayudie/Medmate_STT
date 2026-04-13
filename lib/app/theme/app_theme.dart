@@ -10,9 +10,12 @@ class AppTheme {
       colorScheme: ColorScheme.fromSeed(
         seedColor: _primary,
         brightness: Brightness.light,
+      ).copyWith(
+        surface: const Color(0xFFFFFFFF),
+        surfaceContainerLowest: const Color(0xFFF3F4F6),
       ),
       useMaterial3: true,
-      scaffoldBackgroundColor: const Color(0xFFFFFFFF),
+      scaffoldBackgroundColor: const Color(0xFFF3F4F6),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: const Color(0xFFF3F4F6),
@@ -72,9 +75,12 @@ class AppTheme {
       colorScheme: ColorScheme.fromSeed(
         seedColor: _primary,
         brightness: Brightness.dark,
+      ).copyWith(
+        surface: const Color(0xFF0F172A),
+        surfaceContainerLowest: const Color(0xFF1A1A2E),
       ),
       useMaterial3: true,
-      scaffoldBackgroundColor: const Color(0xFF0F172A),
+      scaffoldBackgroundColor: const Color(0xFF1A1A2E),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
         fillColor: const Color(0xFF1E293B),
