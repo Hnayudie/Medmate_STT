@@ -69,6 +69,7 @@ class AuthScreenScaffold extends StatelessWidget {
                           showText: logoStyle == LogoStyle.full,
                         ),
                       ],
+                      const SizedBox(height: 10),
                       child,
                       const SizedBox(height: 24),
                     ],
