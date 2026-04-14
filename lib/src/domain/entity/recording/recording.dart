@@ -1,6 +1,6 @@
-enum RecordingStatus { synced, transcribing, pending, failed }
+enum RecordingStatus { synced, transcribing, pending, failed, done, draft, processing }
 
-enum RecordingType { soapNote, ehrSummary, none }
+enum RecordingType { soapNote, ehrSummary, toDo, none }
 
 class Recording {
   const Recording({
@@ -10,6 +10,8 @@ class Recording {
     required this.duration,
     required this.createdAt,
     required this.status,
+    this.description = '',
+    this.patientId,
   });
 
   final String id;
@@ -18,43 +20,32 @@ class Recording {
   final Duration duration;
   final DateTime createdAt;
   final RecordingStatus status;
+  final String description;
+  final String? patientId;
 }
 
 // ---------------------------------------------------------------------------
-// Mock data matching the design
+// Mock data – unassigned recordings (no patientId)
 // ---------------------------------------------------------------------------
 
-final kMockRecordings = [
+final kMockUnassignedRecordings = [
   Recording(
-    id: '1',
+    id: 'u1',
     title: 'Encounter #102',
     type: RecordingType.soapNote,
     duration: const Duration(minutes: 4, seconds: 23),
-    createdAt: DateTime(2025, 10, 12),
+    createdAt: DateTime(2026, 3, 26),
     status: RecordingStatus.synced,
   ),
   Recording(
-    id: '2',
-    title: 'Post-Op Follow-up #45',
-    type: RecordingType.soapNote,
-    duration: const Duration(minutes: 2, seconds: 15),
-    createdAt: DateTime.now(),
-    status: RecordingStatus.transcribing,
-  ),
-  Recording(
-    id: '3',
+    id: 'u2',
     title: 'Clinical Note – Heart Exam',
     type: RecordingType.ehrSummary,
     duration: const Duration(minutes: 12, seconds: 7),
-    createdAt: DateTime(2025, 10, 11),
-    status: RecordingStatus.synced,
-  ),
-  Recording(
-    id: '4',
-    title: 'Patient Intake – J. Smith',
-    type: RecordingType.none,
-    duration: const Duration(minutes: 8, seconds: 45),
-    createdAt: DateTime(2025, 10, 9),
-    status: RecordingStatus.synced,
+    createdAt: DateTime(2026, 3, 25),
+    status: RecordingStatus.done,
   ),
 ];
+
+// kept for backward compat
+final kMockRecordings = kMockUnassignedRecordings;

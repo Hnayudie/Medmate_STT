@@ -1,13 +1,13 @@
-class RegisterRequest {
-  const RegisterRequest({
-    required this.fullName,
-    required this.email,
-    required this.password,
-    required this.confirmPassword,
-  });
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  final String fullName;
-  final String email;
-  final String password;
-  final String confirmPassword;
+part 'register_request.freezed.dart';
+
+@freezed
+class RegisterRequest with _$RegisterRequest {
+  const factory RegisterRequest({
+    @Default('') String fullName,
+    @Default('') String email,
+    @Default('') String password,
+    @Default('') String confirmPassword,
+  }) = _RegisterRequest;
 }

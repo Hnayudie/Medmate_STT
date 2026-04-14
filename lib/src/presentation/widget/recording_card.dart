@@ -21,7 +21,7 @@ class RecordingCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
         decoration: BoxDecoration(
           color: colorScheme.surface,
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
           border: isTranscribing
               ? Border.all(color: const Color(0xFFF59E0B), width: 1.5)
               : Border.all(color: Colors.transparent),
@@ -105,6 +105,8 @@ class RecordingCard extends StatelessWidget {
         return l10n.soapNote;
       case RecordingType.ehrSummary:
         return l10n.ehrSummary;
+      case RecordingType.toDo:
+        return 'To Do';
       case RecordingType.none:
         return 'None';
     }
@@ -159,7 +161,27 @@ class _StatusBadge extends StatelessWidget {
         return _pill(
           label: 'Failed',
           bg: const Color(0xFFFEE2E2),
-          fg: const Color(0xFFDC2626),
+          fg: const Color(0xFFE63946),
+        );
+      case RecordingStatus.done:
+        return _pill(
+          label: 'Done',
+          bg: const Color(0xFFDCFCE7),
+          fg: const Color(0xFF16A34A),
+        );
+      case RecordingStatus.draft:
+        return _pill(
+          label: 'Draft',
+          bg: const Color(0xFFFEF9C3),
+          fg: const Color(0xFFCA8A04),
+        );
+      case RecordingStatus.processing:
+        return _pill(
+          label: 'Processing',
+          bg: const Color(0xFFFEF3C7),
+          fg: const Color(0xFFD97706),
+          icon: Icons.sync,
+          spinning: true,
         );
     }
   }

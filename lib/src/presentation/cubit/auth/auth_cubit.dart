@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:medmate_stt/src/domain/entity/auth/login_request.dart';
 import 'package:medmate_stt/src/domain/entity/auth/register_request.dart';
+import 'package:medmate_stt/src/domain/repository/auth_repository.dart';
 import 'package:medmate_stt/src/domain/usecase/auth/login_usecase.dart';
 import 'package:medmate_stt/src/domain/usecase/auth/register_usecase.dart';
 import 'package:medmate_stt/src/presentation/cubit/auth/auth_state.dart';
@@ -11,34 +12,39 @@ class AuthCubit extends Cubit<AuthState> {
   AuthCubit({
     required LoginUseCase loginUseCase,
     required RegisterUseCase registerUseCase,
+    required AuthRepository authRepository,
   })  : _loginUseCase = loginUseCase,
         _registerUseCase = registerUseCase,
-        super(const AuthInitialState());
+        _authRepository = authRepository,
+        super(AuthState.initial());
 
   final LoginUseCase _loginUseCase;
   final RegisterUseCase _registerUseCase;
+  final AuthRepository _authRepository;
 
   Future<void> login({
-    required String username,
+    required String email,
     required String password,
   }) async {
-    emit(AuthLoadingState(
+    emit(AuthState.loading(
       loginViewModel: const LoginViewModel(isLoading: true),
       registerViewModel: state.registerViewModel,
     ));
 
     final result = await _loginUseCase(
-      LoginRequest(username: username.trim(), password: password),
+      LoginRequest(email: email.trim(), password: password),
     );
 
     result.fold(
-      (error) => emit(AuthErrorState(
+      (error) => emit(AuthState.error(
         message: error.toString(),
         loginViewModel: LoginViewModel(errorText: error.toString()),
         registerViewModel: state.registerViewModel,
       )),
-      (data) => emit(AuthSuccessState(
+      (data) => emit(AuthState.success(
         fullName: data.fullName,
+        email: data.email,
+        role: data.role,
         loginViewModel: LoginViewModel.fromDomain(data),
         registerViewModel: state.registerViewModel,
       )),
@@ -51,7 +57,7 @@ class AuthCubit extends Cubit<AuthState> {
     required String password,
     required String confirmPassword,
   }) async {
-    emit(AuthLoadingState(
+    emit(AuthState.loading(
       loginViewModel: state.loginViewModel,
       registerViewModel: const RegisterViewModel(isLoading: true),
     ));
@@ -66,26 +72,46 @@ class AuthCubit extends Cubit<AuthState> {
     );
 
     result.fold(
-      (error) => emit(AuthErrorState(
+      (error) => emit(AuthState.error(
         message: error.toString(),
         loginViewModel: state.loginViewModel,
         registerViewModel: RegisterViewModel(errorText: error.toString()),
       )),
-      (data) => emit(AuthSuccessState(
+      (data) => emit(AuthState.success(
         fullName: data.fullName,
+        email: data.email,
+        role: data.role,
         loginViewModel: state.loginViewModel,
         registerViewModel: RegisterViewModel.fromDomain(data),
       )),
     );
   }
 
+  Future<void> restoreSession() async {
+    final session = await _authRepository.getStoredSession();
+    if (session != null) {
+      emit(AuthState.success(
+        fullName: session.fullName,
+        email: session.email,
+        role: session.role,
+        loginViewModel: LoginViewModel.fromDomain(session),
+        registerViewModel: state.registerViewModel,
+      ));
+    }
+  }
+
+  Future<void> signOut() async {
+    await _authRepository.signOut();
+    emit(AuthState.initial());
+  }
+
   void clearError() {
     if (state is AuthErrorState) {
-      emit(AuthInitialState());
+      emit(AuthState.initial());
     }
   }
 
   void reset() {
-    emit(const AuthInitialState());
+    emit(AuthState.initial());
   }
 }

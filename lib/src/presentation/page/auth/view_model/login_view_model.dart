@@ -1,15 +1,15 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:medmate_stt/src/domain/entity/auth/auth_response.dart';
 
-class LoginViewModel {
-  const LoginViewModel({
-    this.isLoading = false,
-    this.errorText,
-    this.welcomeText,
-  });
+part 'login_view_model.freezed.dart';
 
-  final bool isLoading;
-  final String? errorText;
-  final String? welcomeText;
+@freezed
+class LoginViewModel with _$LoginViewModel {
+  const factory LoginViewModel({
+    @Default(false) bool isLoading,
+    String? errorText,
+    String? welcomeText,
+  }) = _LoginViewModel;
 
   factory LoginViewModel.fromDomain(AuthResponse domain) => LoginViewModel(
         welcomeText: domain.fullName,

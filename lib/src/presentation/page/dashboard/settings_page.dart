@@ -4,7 +4,9 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:medmate_stt/src/presentation/cubit/theme/theme_cubit.dart';
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({super.key});
+  const SettingsPage({required this.onProfileTap, super.key});
+
+  final VoidCallback onProfileTap;
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
@@ -64,7 +66,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         _RowTile(
                           icon: Icons.person_outline,
                           label: l10n.profile,
-                          onTap: () => Navigator.of(context).pop(),
+                          onTap: () => widget.onProfileTap(),
                         ),
                       ],
                     ),
@@ -153,7 +155,7 @@ class _SectionHeader extends StatelessWidget {
       style: const TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w700,
-        color: Color(0xFFFB8500),
+        color: Color(0xFFFB8A0A),
         letterSpacing: 1.0,
       ),
     );

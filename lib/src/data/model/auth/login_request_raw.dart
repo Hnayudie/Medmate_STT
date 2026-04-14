@@ -1,18 +1,21 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:medmate_stt/src/domain/entity/auth/login_request.dart';
 
-class LoginRequestRaw {
-  const LoginRequestRaw({required this.username, required this.password});
+part 'login_request_raw.freezed.dart';
+part 'login_request_raw.g.dart';
 
-  final String username;
-  final String password;
+@freezed
+class LoginRequestRaw with _$LoginRequestRaw {
+  const factory LoginRequestRaw({
+    @JsonKey(name: 'email') @Default('') String email,
+    @JsonKey(name: 'password') @Default('') String password,
+  }) = _LoginRequestRaw;
+
+  factory LoginRequestRaw.fromJson(Map<String, dynamic> json) =>
+      _$LoginRequestRawFromJson(json);
 
   factory LoginRequestRaw.fromDomain(LoginRequest domain) => LoginRequestRaw(
-        username: domain.username,
+        email: domain.email,
         password: domain.password,
       );
-
-  Map<String, dynamic> toJson() => {
-        'username': username,
-        'password': password,
-      };
 }

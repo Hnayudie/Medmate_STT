@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:medmate_stt/src/presentation/cubit/auth/auth_cubit.dart';
+import 'package:medmate_stt/src/presentation/cubit/auth/auth_state.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({required this.userName, super.key});
-
-  final String userName;
+  const ProfilePage({super.key});
 
   String _initials(String name) {
     final parts = name.trim().split(' ');
@@ -18,6 +19,9 @@ class ProfilePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final colorScheme = Theme.of(context).colorScheme;
+    final authState = context.watch<AuthCubit>().state;
+    final userName = authState is AuthSuccessState ? authState.fullName : '';
+    final email = authState is AuthSuccessState ? authState.email : '';
 
     return Scaffold(
       backgroundColor: colorScheme.surfaceContainerLowest,
@@ -109,7 +113,7 @@ class ProfilePage extends StatelessWidget {
                         _InfoRow(
                           icon: Icons.email_outlined,
                           label: l10n.email,
-                          value: '—',
+                          value: email.isNotEmpty ? email : '—',
                         ),
                       ],
                     ),
@@ -129,10 +133,7 @@ class ProfilePage extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: OutlinedButton.icon(
-                        onPressed: () {
-                          Navigator.of(context)
-                              .popUntil((r) => r.isFirst);
-                        },
+                        onPressed: () => context.read<AuthCubit>().signOut(),
                         icon: const Icon(Icons.logout,
                             size: 18, color: Color(0xFFDC2626)),
                         label: Text(
@@ -178,7 +179,7 @@ class _SectionHeader extends StatelessWidget {
         style: const TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.w600,
-          color: Color(0xFFFB8500),
+          color: Color(0xFFFB8A0A),
           letterSpacing: 0.8,
         ),
       ),

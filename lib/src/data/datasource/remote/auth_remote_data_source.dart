@@ -2,6 +2,7 @@ import 'package:medmate_stt/src/data/network/rest_client.dart';
 import 'package:medmate_stt/src/data/model/auth/login_request_raw.dart';
 import 'package:medmate_stt/src/data/model/auth/register_request_raw.dart';
 import 'package:medmate_stt/src/data/model/auth/auth_response_raw.dart';
+import 'package:medmate_stt/src/data/model/auth/user_profile_raw.dart';
 
 class AuthRemoteDataSource {
   AuthRemoteDataSource({RestClient? restClient})
@@ -15,5 +16,9 @@ class AuthRemoteDataSource {
 
   Future<AuthResponseRaw> register(RegisterRequestRaw request) {
     return _restClient.register(request);
+  }
+
+  Future<UserProfileRaw> getMe({required String accessToken}) {
+    return _restClient.getMe(accessToken: accessToken);
   }
 }

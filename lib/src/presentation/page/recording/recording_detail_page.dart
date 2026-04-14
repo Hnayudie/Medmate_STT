@@ -279,7 +279,7 @@ class _TabBar extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
               child: Icon(Icons.copy_outlined,
-                  size: 18, color: const Color(0xFFFB8500)),
+                  size: 18, color: const Color(0xFFFB8A0A)),
             ),
           ),
         ],
@@ -489,7 +489,7 @@ class _EhrSection extends StatelessWidget {
           style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,
-            color: Color(0xFFFB8500),
+            color: Color(0xFFFB8A0A),
             letterSpacing: 1.0,
           ),
         ),

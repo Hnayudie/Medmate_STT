@@ -7,14 +7,14 @@ import 'package:medmate_stt/src/presentation/cubit/locale/locale_cubit.dart';
 class SidebarDrawer extends StatefulWidget {
   const SidebarDrawer({
     required this.userName,
-    required this.onProfileTap,
     required this.onSignOut,
+    required this.onProfileTap,
     super.key,
   });
 
   final String userName;
-  final VoidCallback onProfileTap;
   final VoidCallback onSignOut;
+  final VoidCallback onProfileTap;
 
   @override
   State<SidebarDrawer> createState() => _SidebarDrawerState();
@@ -37,16 +37,11 @@ class _SidebarDrawerState extends State<SidebarDrawer> {
     final colorScheme = Theme.of(context).colorScheme;
 
     return Drawer(
-      width: 280,
+      width: 300,
       child: Column(
         children: [
           // ── Header ──────────────────────────────────────────────────────
-          GestureDetector(
-            onTap: () {
-              Navigator.of(context).pop();
-              widget.onProfileTap();
-            },
-            child: Container(
+          Container(
               width: double.infinity,
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).padding.top + 24,
@@ -87,7 +82,6 @@ class _SidebarDrawerState extends State<SidebarDrawer> {
                   ),
                 ],
               ),
-            ),
           ),
 
           // ── Menu items ──────────────────────────────────────────────────
@@ -127,7 +121,7 @@ class _SidebarDrawerState extends State<SidebarDrawer> {
                             setState(() => _autoTranscribe = v),
                         trackColor: WidgetStateProperty.resolveWith((states) {
                           if (states.contains(WidgetState.selected)) {
-                            return const Color(0xFFFB8500);
+                            return const Color(0xFFFB8A0A);
                           }
                           return const Color(0xFFD1D5DB);
                         }),
@@ -213,7 +207,9 @@ class _SidebarDrawerState extends State<SidebarDrawer> {
                     Navigator.of(context).pop();
                     Navigator.of(context).push(
                       MaterialPageRoute<void>(
-                        builder: (_) => const SettingsPage(),
+                        builder: (_) => SettingsPage(
+                          onProfileTap: widget.onProfileTap,
+                        ),
                       ),
                     );
                   },
@@ -265,28 +261,38 @@ class _SidebarTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const activeColor = Color(0xFFFB8500);
+    const activeColor = Color(0xFFFB8A0A);
     final inactiveColor = Theme.of(context).colorScheme.outline;
     final onSurface = Theme.of(context).colorScheme.onSurface;
 
-    return ListTile(
-      leading: Icon(icon,
-          size: 20, color: active ? activeColor : inactiveColor),
-      title: Text(
-        label,
-        style: TextStyle(
-          fontSize: 15,
-          fontWeight: active ? FontWeight.w600 : FontWeight.normal,
-          color: active ? activeColor : onSurface,
+    return Container(
+      decoration: active
+          ? const BoxDecoration(
+              border: Border(
+                left: BorderSide(color: Color(0xFF219EBC), width: 3),
+              ),
+            )
+          : null,
+      child: ListTile(
+        leading: Icon(icon,
+            size: 20, color: active ? activeColor : inactiveColor),
+        title: Text(
+          label,
+          style: TextStyle(
+            fontSize: 15,
+            fontWeight: active ? FontWeight.w600 : FontWeight.normal,
+            color: active ? activeColor : onSurface,
+          ),
         ),
+        tileColor: active
+            ? const Color(0xFFFFF7ED)
+            : Colors.transparent,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        contentPadding:
+            const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+        minVerticalPadding: 8,
+        onTap: onTap,
       ),
-      tileColor: active
-          ? const Color(0xFFFFF7ED)
-          : Colors.transparent,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-      contentPadding:
-          const EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-      onTap: onTap,
     );
   }
 }

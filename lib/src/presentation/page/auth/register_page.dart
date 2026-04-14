@@ -208,7 +208,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 const SizedBox(height: 8),
                 Text(
                   vm.errorText!,
-                  style: const TextStyle(color: Color(0xFFDC2626), fontSize: 13),
+                  style: const TextStyle(color: Color(0xFFE63946), fontSize: 13),
                 ),
               ],
 
@@ -285,8 +285,8 @@ class _FieldLabel extends StatelessWidget {
     return Text(
       label,
       style: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
+        fontSize: 13,
+        fontWeight: FontWeight.w600,
         color: Theme.of(context).colorScheme.onSurface,
       ),
     );

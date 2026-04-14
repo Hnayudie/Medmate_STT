@@ -5,7 +5,7 @@ import 'package:medmate_stt/src/presentation/cubit/locale/locale_cubit.dart';
 import 'package:medmate_stt/src/presentation/definition/app_icons.dart';
 
 const Color _kPrimary = Color(0xFF219EBC);
-const Color _kOrange = Color(0xFFFB8500);
+const Color _kOrange = Color(0xFFFB8A0A);
 
 enum LogoStyle {
   /// Ảnh + tên app + tagline (màn đăng nhập)
@@ -33,6 +33,7 @@ class AuthScreenScaffold extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: Column(
           children: [
@@ -56,7 +57,7 @@ class AuthScreenScaffold extends StatelessWidget {
             // Scrollable content
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 32),
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 420),
                   child: Column(

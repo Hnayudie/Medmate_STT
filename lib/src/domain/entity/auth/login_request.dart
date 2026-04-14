@@ -1,6 +1,11 @@
-class LoginRequest {
-  const LoginRequest({required this.username, required this.password});
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  final String username;
-  final String password;
+part 'login_request.freezed.dart';
+
+@freezed
+class LoginRequest with _$LoginRequest {
+  const factory LoginRequest({
+    @Default('') String email,
+    @Default('') String password,
+  }) = _LoginRequest;
 }

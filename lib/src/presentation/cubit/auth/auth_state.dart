@@ -1,41 +1,32 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:medmate_stt/src/presentation/page/auth/view_model/login_view_model.dart';
 import 'package:medmate_stt/src/presentation/page/auth/view_model/register_view_model.dart';
 
-sealed class AuthState {
-  const AuthState({required this.loginViewModel, required this.registerViewModel});
-  final LoginViewModel loginViewModel;
-  final RegisterViewModel registerViewModel;
-}
+part 'auth_state.freezed.dart';
 
-final class AuthInitialState extends AuthState {
-  const AuthInitialState()
-      : super(
-          loginViewModel: const LoginViewModel(),
-          registerViewModel: const RegisterViewModel(),
-        );
-}
+@freezed
+abstract class AuthState with _$AuthState {
+  factory AuthState.initial({
+    @Default(LoginViewModel()) LoginViewModel loginViewModel,
+    @Default(RegisterViewModel()) RegisterViewModel registerViewModel,
+  }) = AuthInitialState;
 
-final class AuthLoadingState extends AuthState {
-  const AuthLoadingState({
-    required super.loginViewModel,
-    required super.registerViewModel,
-  });
-}
+  factory AuthState.loading({
+    @Default(LoginViewModel()) LoginViewModel loginViewModel,
+    @Default(RegisterViewModel()) RegisterViewModel registerViewModel,
+  }) = AuthLoadingState;
 
-final class AuthSuccessState extends AuthState {
-  const AuthSuccessState({
-    required this.fullName,
-    required super.loginViewModel,
-    required super.registerViewModel,
-  });
-  final String fullName;
-}
+  factory AuthState.success({
+    @Default('') String fullName,
+    @Default('') String email,
+    @Default('') String role,
+    @Default(LoginViewModel()) LoginViewModel loginViewModel,
+    @Default(RegisterViewModel()) RegisterViewModel registerViewModel,
+  }) = AuthSuccessState;
 
-final class AuthErrorState extends AuthState {
-  const AuthErrorState({
-    required this.message,
-    required super.loginViewModel,
-    required super.registerViewModel,
-  });
-  final String message;
+  factory AuthState.error({
+    @Default('') String message,
+    @Default(LoginViewModel()) LoginViewModel loginViewModel,
+    @Default(RegisterViewModel()) RegisterViewModel registerViewModel,
+  }) = AuthErrorState;
 }

@@ -5,7 +5,6 @@ import 'package:medmate_stt/src/presentation/cubit/auth/auth_cubit.dart';
 import 'package:medmate_stt/src/presentation/cubit/auth/auth_state.dart';
 import 'package:medmate_stt/src/presentation/page/auth/register_page.dart';
 import 'package:medmate_stt/src/presentation/widget/auth_screen_scaffold.dart';
-import 'package:medmate_stt/src/presentation/page/dashboard/dashboard_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -44,16 +43,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 
-    return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {
-        if (state is AuthSuccessState) {
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute<void>(
-              builder: (_) => DashboardPage(userName: state.fullName),
-            ),
-          );
-        }
-      },
+    return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
         final vm = state.loginViewModel;
         return AuthScreenScaffold(
@@ -78,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
                   context.read<AuthCubit>().clearError();
                 },
               ),
-              const SizedBox(height: 14),
+              const SizedBox(height: 18),
 
               // Password
               _FieldLabel(l10n.password),
@@ -115,7 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                 const SizedBox(height: 8),
                 Text(
                   vm.errorText!,
-                  style: const TextStyle(color: Color(0xFFDC2626), fontSize: 13),
+                  style: const TextStyle(color: Color(0xFFE63946), fontSize: 13),
                 ),
               ],
 
@@ -167,7 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                     : () {
                         if (_validate(l10n)) {
                           context.read<AuthCubit>().login(
-                                username: _phoneEmailController.text.trim(),
+                                email: _phoneEmailController.text.trim(),
                                 password: _passwordController.text,
                               );
                         }
@@ -232,8 +222,8 @@ class _FieldLabel extends StatelessWidget {
     return Text(
       label,
       style: TextStyle(
-        fontSize: 14,
-        fontWeight: FontWeight.w500,
+        fontSize: 13,
+        fontWeight: FontWeight.w600,
         color: Theme.of(context).colorScheme.onSurface,
       ),
     );

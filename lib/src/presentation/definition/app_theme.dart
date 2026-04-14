@@ -4,6 +4,7 @@ class AppTheme {
   const AppTheme._();
 
   static const Color _primary = Color(0xFF219EBC);
+  static const Color _error = Color(0xFFE63946);
 
   static ThemeData get lightTheme {
     return ThemeData(
@@ -12,36 +13,38 @@ class AppTheme {
         brightness: Brightness.light,
       ).copyWith(
         surface: const Color(0xFFFFFFFF),
-        surfaceContainerLowest: const Color(0xFFF3F4F6),
+        surfaceContainerLowest: const Color(0xFFF9FAFB),
+        error: _error,
       ),
       useMaterial3: true,
-      scaffoldBackgroundColor: const Color(0xFFF3F4F6),
+      scaffoldBackgroundColor: const Color(0xFFF9FAFB),
+      fontFamily: 'Inter',
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: const Color(0xFFF3F4F6),
+        fillColor: const Color(0xFFF5F5F5),
         hintStyle: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 14),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: Color(0xFF219EBC), width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: Color(0xFFDC2626), width: 1.5),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: _error, width: 1.5),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: Color(0xFFDC2626), width: 1.5),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: _error, width: 1.5),
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        errorStyle: const TextStyle(color: Color(0xFFDC2626), fontSize: 12),
+        errorStyle: const TextStyle(color: _error, fontSize: 12),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
@@ -50,7 +53,7 @@ class AppTheme {
           disabledBackgroundColor: const Color(0x99219EBC),
           minimumSize: const Size.fromHeight(52),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
           ),
           textStyle: const TextStyle(
             fontSize: 16,
@@ -76,37 +79,39 @@ class AppTheme {
         seedColor: _primary,
         brightness: Brightness.dark,
       ).copyWith(
-        surface: const Color(0xFF0F172A),
-        surfaceContainerLowest: const Color(0xFF1A1A2E),
+        surface: const Color(0xFF1A1A1A),
+        surfaceContainerLowest: const Color(0xFF0A0A0A),
+        error: _error,
       ),
       useMaterial3: true,
-      scaffoldBackgroundColor: const Color(0xFF1A1A2E),
+      scaffoldBackgroundColor: const Color(0xFF0A0A0A),
+      fontFamily: 'Inter',
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: const Color(0xFF1E293B),
+        fillColor: const Color(0xFF1E1E1E),
         hintStyle: const TextStyle(color: Color(0xFF64748B), fontSize: 14),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(12),
           borderSide: const BorderSide(color: Color(0xFF219EBC), width: 1.5),
         ),
         errorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: Color(0xFFDC2626), width: 1.5),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: _error, width: 1.5),
         ),
         focusedErrorBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
-          borderSide: const BorderSide(color: Color(0xFFDC2626), width: 1.5),
+          borderRadius: BorderRadius.circular(12),
+          borderSide: const BorderSide(color: _error, width: 1.5),
         ),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-        errorStyle: const TextStyle(color: Color(0xFFDC2626), fontSize: 12),
+        errorStyle: const TextStyle(color: _error, fontSize: 12),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
@@ -115,7 +120,7 @@ class AppTheme {
           disabledBackgroundColor: const Color(0x99219EBC),
           minimumSize: const Size.fromHeight(52),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(12),
           ),
           textStyle: const TextStyle(
             fontSize: 16,

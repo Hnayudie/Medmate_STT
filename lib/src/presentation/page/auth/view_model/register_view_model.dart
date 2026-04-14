@@ -1,15 +1,15 @@
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:medmate_stt/src/domain/entity/auth/auth_response.dart';
 
-class RegisterViewModel {
-  const RegisterViewModel({
-    this.isLoading = false,
-    this.errorText,
-    this.successText,
-  });
+part 'register_view_model.freezed.dart';
 
-  final bool isLoading;
-  final String? errorText;
-  final String? successText;
+@freezed
+class RegisterViewModel with _$RegisterViewModel {
+  const factory RegisterViewModel({
+    @Default(false) bool isLoading,
+    String? errorText,
+    String? successText,
+  }) = _RegisterViewModel;
 
   factory RegisterViewModel.fromDomain(AuthResponse domain) => RegisterViewModel(
         successText: domain.fullName,
