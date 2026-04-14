@@ -1,4 +1,4 @@
-import 'app/app.dart';
+import 'src/app.dart';
 
 void main() {
   runMedMateApp();
