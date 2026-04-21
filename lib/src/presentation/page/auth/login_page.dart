@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:medmate_stt/src/presentation/cubit/auth/auth_cubit.dart';
 import 'package:medmate_stt/src/presentation/cubit/auth/auth_state.dart';
+import 'package:medmate_stt/src/presentation/page/auth/view_model/login_view_model.dart';
 import 'package:medmate_stt/src/presentation/page/auth/register_page.dart';
 import 'package:medmate_stt/src/presentation/widget/auth_screen_scaffold.dart';
 
@@ -45,8 +46,37 @@ class _LoginPageState extends State<LoginPage> {
 
     return BlocBuilder<AuthCubit, AuthState>(
       builder: (context, state) {
-        final vm = state.loginViewModel;
+        final vm = state is AuthSplashState
+            ? const LoginViewModel()
+            : (state as dynamic).loginViewModel as LoginViewModel;
         return AuthScreenScaffold(
+          bottomWidget: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                '${l10n.dontHaveAccount} ',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
+              ),
+              GestureDetector(
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => const RegisterPage(),
+                  ),
+                ),
+                child: Text(
+                  l10n.signUp,
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Color(0xFF219EBC),
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ],
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -174,33 +204,23 @@ class _LoginPageState extends State<LoginPage> {
                     : Text(l10n.signIn),
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
 
-              // Sign Up link
+              // HIPAA badge
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    '${l10n.dontHaveAccount} ',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Theme.of(context).colorScheme.onSurface,
-                    ),
+                  Icon(
+                    Icons.lock_outline,
+                    size: 12,
+                    color: Theme.of(context).colorScheme.outline,
                   ),
-                  GestureDetector(
-                    onTap: () => Navigator.of(context).push(
-                      MaterialPageRoute<void>(
-                        builder: (_) => const RegisterPage(),
-                      ),
-                    ),
-                    child: Text(
-                      l10n.signUp,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        color: Color(0xFF219EBC),
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                  const SizedBox(width: 4),
+                  Text(
+                    l10n.hipaaCompliant,
+                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
                   ),
                 ],
               ),

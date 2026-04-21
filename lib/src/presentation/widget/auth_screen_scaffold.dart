@@ -21,12 +21,16 @@ class AuthScreenScaffold extends StatelessWidget {
     required this.child,
     this.showBackButton = false,
     this.logoStyle = LogoStyle.full,
+    this.showHipaa = false,
+    this.bottomWidget,
     super.key,
   });
 
   final Widget child;
   final bool showBackButton;
   final LogoStyle logoStyle;
+  final bool showHipaa;
+  final Widget? bottomWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -78,27 +82,11 @@ class AuthScreenScaffold extends StatelessWidget {
                 ),
               ),
             ),
-            // Footer
-            Padding(
-              padding: const EdgeInsets.only(bottom: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.lock_outline,
-                    size: 12,
-                    color: Theme.of(context).colorScheme.outline,
-                  ),
-                  const SizedBox(width: 4),
-                  Text(
-                    l10n.hipaaCompliant,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Theme.of(context).colorScheme.outline,
-                        ),
-                  ),
-                ],
+            if (bottomWidget != null)
+              Padding(
+                padding: const EdgeInsets.only(bottom: 24),
+                child: bottomWidget!,
               ),
-            ),
           ],
         ),
       ),

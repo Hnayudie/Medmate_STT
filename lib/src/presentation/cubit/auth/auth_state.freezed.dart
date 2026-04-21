@@ -16,10 +16,9 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$AuthState {
-  LoginViewModel get loginViewModel => throw _privateConstructorUsedError;
-  RegisterViewModel get registerViewModel => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() splash,
     required TResult Function(
             LoginViewModel loginViewModel, RegisterViewModel registerViewModel)
         initial,
@@ -36,6 +35,7 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? splash,
     TResult? Function(
             LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
         initial,
@@ -52,6 +52,7 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? splash,
     TResult Function(
             LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
         initial,
@@ -69,6 +70,7 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(AuthSplashState value) splash,
     required TResult Function(AuthInitialState value) initial,
     required TResult Function(AuthLoadingState value) loading,
     required TResult Function(AuthSuccessState value) success,
@@ -77,6 +79,7 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthSplashState value)? splash,
     TResult? Function(AuthInitialState value)? initial,
     TResult? Function(AuthLoadingState value)? loading,
     TResult? Function(AuthSuccessState value)? success,
@@ -85,6 +88,7 @@ mixin _$AuthState {
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthSplashState value)? splash,
     TResult Function(AuthInitialState value)? initial,
     TResult Function(AuthLoadingState value)? loading,
     TResult Function(AuthSuccessState value)? success,
@@ -92,24 +96,12 @@ mixin _$AuthState {
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
-
-  /// Create a copy of AuthState
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  $AuthStateCopyWith<AuthState> get copyWith =>
-      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res, AuthState>;
-  @useResult
-  $Res call(
-      {LoginViewModel loginViewModel, RegisterViewModel registerViewModel});
-
-  $LoginViewModelCopyWith<$Res> get loginViewModel;
-  $RegisterViewModelCopyWith<$Res> get registerViewModel;
 }
 
 /// @nodoc
@@ -124,59 +116,165 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? loginViewModel = null,
-    Object? registerViewModel = null,
-  }) {
-    return _then(_value.copyWith(
-      loginViewModel: null == loginViewModel
-          ? _value.loginViewModel
-          : loginViewModel // ignore: cast_nullable_to_non_nullable
-              as LoginViewModel,
-      registerViewModel: null == registerViewModel
-          ? _value.registerViewModel
-          : registerViewModel // ignore: cast_nullable_to_non_nullable
-              as RegisterViewModel,
-    ) as $Val);
-  }
-
-  /// Create a copy of AuthState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $LoginViewModelCopyWith<$Res> get loginViewModel {
-    return $LoginViewModelCopyWith<$Res>(_value.loginViewModel, (value) {
-      return _then(_value.copyWith(loginViewModel: value) as $Val);
-    });
-  }
-
-  /// Create a copy of AuthState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $RegisterViewModelCopyWith<$Res> get registerViewModel {
-    return $RegisterViewModelCopyWith<$Res>(_value.registerViewModel, (value) {
-      return _then(_value.copyWith(registerViewModel: value) as $Val);
-    });
-  }
 }
 
 /// @nodoc
-abstract class _$$AuthInitialStateImplCopyWith<$Res>
-    implements $AuthStateCopyWith<$Res> {
+abstract class _$$AuthSplashStateImplCopyWith<$Res> {
+  factory _$$AuthSplashStateImplCopyWith(_$AuthSplashStateImpl value,
+          $Res Function(_$AuthSplashStateImpl) then) =
+      __$$AuthSplashStateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AuthSplashStateImplCopyWithImpl<$Res>
+    extends _$AuthStateCopyWithImpl<$Res, _$AuthSplashStateImpl>
+    implements _$$AuthSplashStateImplCopyWith<$Res> {
+  __$$AuthSplashStateImplCopyWithImpl(
+      _$AuthSplashStateImpl _value, $Res Function(_$AuthSplashStateImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$AuthSplashStateImpl implements AuthSplashState {
+  _$AuthSplashStateImpl();
+
+  @override
+  String toString() {
+    return 'AuthState.splash()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$AuthSplashStateImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() splash,
+    required TResult Function(
+            LoginViewModel loginViewModel, RegisterViewModel registerViewModel)
+        initial,
+    required TResult Function(
+            LoginViewModel loginViewModel, RegisterViewModel registerViewModel)
+        loading,
+    required TResult Function(String fullName, String email, String role,
+            LoginViewModel loginViewModel, RegisterViewModel registerViewModel)
+        success,
+    required TResult Function(String message, LoginViewModel loginViewModel,
+            RegisterViewModel registerViewModel)
+        error,
+  }) {
+    return splash();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? splash,
+    TResult? Function(
+            LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
+        initial,
+    TResult? Function(
+            LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
+        loading,
+    TResult? Function(String fullName, String email, String role,
+            LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
+        success,
+    TResult? Function(String message, LoginViewModel loginViewModel,
+            RegisterViewModel registerViewModel)?
+        error,
+  }) {
+    return splash?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? splash,
+    TResult Function(
+            LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
+        initial,
+    TResult Function(
+            LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
+        loading,
+    TResult Function(String fullName, String email, String role,
+            LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
+        success,
+    TResult Function(String message, LoginViewModel loginViewModel,
+            RegisterViewModel registerViewModel)?
+        error,
+    required TResult orElse(),
+  }) {
+    if (splash != null) {
+      return splash();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(AuthSplashState value) splash,
+    required TResult Function(AuthInitialState value) initial,
+    required TResult Function(AuthLoadingState value) loading,
+    required TResult Function(AuthSuccessState value) success,
+    required TResult Function(AuthErrorState value) error,
+  }) {
+    return splash(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthSplashState value)? splash,
+    TResult? Function(AuthInitialState value)? initial,
+    TResult? Function(AuthLoadingState value)? loading,
+    TResult? Function(AuthSuccessState value)? success,
+    TResult? Function(AuthErrorState value)? error,
+  }) {
+    return splash?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthSplashState value)? splash,
+    TResult Function(AuthInitialState value)? initial,
+    TResult Function(AuthLoadingState value)? loading,
+    TResult Function(AuthSuccessState value)? success,
+    TResult Function(AuthErrorState value)? error,
+    required TResult orElse(),
+  }) {
+    if (splash != null) {
+      return splash(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AuthSplashState implements AuthState {
+  factory AuthSplashState() = _$AuthSplashStateImpl;
+}
+
+/// @nodoc
+abstract class _$$AuthInitialStateImplCopyWith<$Res> {
   factory _$$AuthInitialStateImplCopyWith(_$AuthInitialStateImpl value,
           $Res Function(_$AuthInitialStateImpl) then) =
       __$$AuthInitialStateImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call(
       {LoginViewModel loginViewModel, RegisterViewModel registerViewModel});
 
-  @override
   $LoginViewModelCopyWith<$Res> get loginViewModel;
-  @override
   $RegisterViewModelCopyWith<$Res> get registerViewModel;
 }
 
@@ -206,6 +304,26 @@ class __$$AuthInitialStateImplCopyWithImpl<$Res>
           : registerViewModel // ignore: cast_nullable_to_non_nullable
               as RegisterViewModel,
     ));
+  }
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LoginViewModelCopyWith<$Res> get loginViewModel {
+    return $LoginViewModelCopyWith<$Res>(_value.loginViewModel, (value) {
+      return _then(_value.copyWith(loginViewModel: value));
+    });
+  }
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $RegisterViewModelCopyWith<$Res> get registerViewModel {
+    return $RegisterViewModelCopyWith<$Res>(_value.registerViewModel, (value) {
+      return _then(_value.copyWith(registerViewModel: value));
+    });
   }
 }
 
@@ -255,6 +373,7 @@ class _$AuthInitialStateImpl implements AuthInitialState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() splash,
     required TResult Function(
             LoginViewModel loginViewModel, RegisterViewModel registerViewModel)
         initial,
@@ -274,6 +393,7 @@ class _$AuthInitialStateImpl implements AuthInitialState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? splash,
     TResult? Function(
             LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
         initial,
@@ -293,6 +413,7 @@ class _$AuthInitialStateImpl implements AuthInitialState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? splash,
     TResult Function(
             LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
         initial,
@@ -316,6 +437,7 @@ class _$AuthInitialStateImpl implements AuthInitialState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(AuthSplashState value) splash,
     required TResult Function(AuthInitialState value) initial,
     required TResult Function(AuthLoadingState value) loading,
     required TResult Function(AuthSuccessState value) success,
@@ -327,6 +449,7 @@ class _$AuthInitialStateImpl implements AuthInitialState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthSplashState value)? splash,
     TResult? Function(AuthInitialState value)? initial,
     TResult? Function(AuthLoadingState value)? loading,
     TResult? Function(AuthSuccessState value)? success,
@@ -338,6 +461,7 @@ class _$AuthInitialStateImpl implements AuthInitialState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthSplashState value)? splash,
     TResult Function(AuthInitialState value)? initial,
     TResult Function(AuthLoadingState value)? loading,
     TResult Function(AuthSuccessState value)? success,
@@ -356,33 +480,26 @@ abstract class AuthInitialState implements AuthState {
       {final LoginViewModel loginViewModel,
       final RegisterViewModel registerViewModel}) = _$AuthInitialStateImpl;
 
-  @override
   LoginViewModel get loginViewModel;
-  @override
   RegisterViewModel get registerViewModel;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthInitialStateImplCopyWith<_$AuthInitialStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AuthLoadingStateImplCopyWith<$Res>
-    implements $AuthStateCopyWith<$Res> {
+abstract class _$$AuthLoadingStateImplCopyWith<$Res> {
   factory _$$AuthLoadingStateImplCopyWith(_$AuthLoadingStateImpl value,
           $Res Function(_$AuthLoadingStateImpl) then) =
       __$$AuthLoadingStateImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call(
       {LoginViewModel loginViewModel, RegisterViewModel registerViewModel});
 
-  @override
   $LoginViewModelCopyWith<$Res> get loginViewModel;
-  @override
   $RegisterViewModelCopyWith<$Res> get registerViewModel;
 }
 
@@ -412,6 +529,26 @@ class __$$AuthLoadingStateImplCopyWithImpl<$Res>
           : registerViewModel // ignore: cast_nullable_to_non_nullable
               as RegisterViewModel,
     ));
+  }
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LoginViewModelCopyWith<$Res> get loginViewModel {
+    return $LoginViewModelCopyWith<$Res>(_value.loginViewModel, (value) {
+      return _then(_value.copyWith(loginViewModel: value));
+    });
+  }
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $RegisterViewModelCopyWith<$Res> get registerViewModel {
+    return $RegisterViewModelCopyWith<$Res>(_value.registerViewModel, (value) {
+      return _then(_value.copyWith(registerViewModel: value));
+    });
   }
 }
 
@@ -461,6 +598,7 @@ class _$AuthLoadingStateImpl implements AuthLoadingState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() splash,
     required TResult Function(
             LoginViewModel loginViewModel, RegisterViewModel registerViewModel)
         initial,
@@ -480,6 +618,7 @@ class _$AuthLoadingStateImpl implements AuthLoadingState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? splash,
     TResult? Function(
             LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
         initial,
@@ -499,6 +638,7 @@ class _$AuthLoadingStateImpl implements AuthLoadingState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? splash,
     TResult Function(
             LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
         initial,
@@ -522,6 +662,7 @@ class _$AuthLoadingStateImpl implements AuthLoadingState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(AuthSplashState value) splash,
     required TResult Function(AuthInitialState value) initial,
     required TResult Function(AuthLoadingState value) loading,
     required TResult Function(AuthSuccessState value) success,
@@ -533,6 +674,7 @@ class _$AuthLoadingStateImpl implements AuthLoadingState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthSplashState value)? splash,
     TResult? Function(AuthInitialState value)? initial,
     TResult? Function(AuthLoadingState value)? loading,
     TResult? Function(AuthSuccessState value)? success,
@@ -544,6 +686,7 @@ class _$AuthLoadingStateImpl implements AuthLoadingState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthSplashState value)? splash,
     TResult Function(AuthInitialState value)? initial,
     TResult Function(AuthLoadingState value)? loading,
     TResult Function(AuthSuccessState value)? success,
@@ -562,26 +705,21 @@ abstract class AuthLoadingState implements AuthState {
       {final LoginViewModel loginViewModel,
       final RegisterViewModel registerViewModel}) = _$AuthLoadingStateImpl;
 
-  @override
   LoginViewModel get loginViewModel;
-  @override
   RegisterViewModel get registerViewModel;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthLoadingStateImplCopyWith<_$AuthLoadingStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AuthSuccessStateImplCopyWith<$Res>
-    implements $AuthStateCopyWith<$Res> {
+abstract class _$$AuthSuccessStateImplCopyWith<$Res> {
   factory _$$AuthSuccessStateImplCopyWith(_$AuthSuccessStateImpl value,
           $Res Function(_$AuthSuccessStateImpl) then) =
       __$$AuthSuccessStateImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call(
       {String fullName,
@@ -590,9 +728,7 @@ abstract class _$$AuthSuccessStateImplCopyWith<$Res>
       LoginViewModel loginViewModel,
       RegisterViewModel registerViewModel});
 
-  @override
   $LoginViewModelCopyWith<$Res> get loginViewModel;
-  @override
   $RegisterViewModelCopyWith<$Res> get registerViewModel;
 }
 
@@ -637,6 +773,26 @@ class __$$AuthSuccessStateImplCopyWithImpl<$Res>
           : registerViewModel // ignore: cast_nullable_to_non_nullable
               as RegisterViewModel,
     ));
+  }
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LoginViewModelCopyWith<$Res> get loginViewModel {
+    return $LoginViewModelCopyWith<$Res>(_value.loginViewModel, (value) {
+      return _then(_value.copyWith(loginViewModel: value));
+    });
+  }
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $RegisterViewModelCopyWith<$Res> get registerViewModel {
+    return $RegisterViewModelCopyWith<$Res>(_value.registerViewModel, (value) {
+      return _then(_value.copyWith(registerViewModel: value));
+    });
   }
 }
 
@@ -702,6 +858,7 @@ class _$AuthSuccessStateImpl implements AuthSuccessState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() splash,
     required TResult Function(
             LoginViewModel loginViewModel, RegisterViewModel registerViewModel)
         initial,
@@ -721,6 +878,7 @@ class _$AuthSuccessStateImpl implements AuthSuccessState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? splash,
     TResult? Function(
             LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
         initial,
@@ -741,6 +899,7 @@ class _$AuthSuccessStateImpl implements AuthSuccessState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? splash,
     TResult Function(
             LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
         initial,
@@ -764,6 +923,7 @@ class _$AuthSuccessStateImpl implements AuthSuccessState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(AuthSplashState value) splash,
     required TResult Function(AuthInitialState value) initial,
     required TResult Function(AuthLoadingState value) loading,
     required TResult Function(AuthSuccessState value) success,
@@ -775,6 +935,7 @@ class _$AuthSuccessStateImpl implements AuthSuccessState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthSplashState value)? splash,
     TResult? Function(AuthInitialState value)? initial,
     TResult? Function(AuthLoadingState value)? loading,
     TResult? Function(AuthSuccessState value)? success,
@@ -786,6 +947,7 @@ class _$AuthSuccessStateImpl implements AuthSuccessState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthSplashState value)? splash,
     TResult Function(AuthInitialState value)? initial,
     TResult Function(AuthLoadingState value)? loading,
     TResult Function(AuthSuccessState value)? success,
@@ -810,35 +972,28 @@ abstract class AuthSuccessState implements AuthState {
   String get fullName;
   String get email;
   String get role;
-  @override
   LoginViewModel get loginViewModel;
-  @override
   RegisterViewModel get registerViewModel;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthSuccessStateImplCopyWith<_$AuthSuccessStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AuthErrorStateImplCopyWith<$Res>
-    implements $AuthStateCopyWith<$Res> {
+abstract class _$$AuthErrorStateImplCopyWith<$Res> {
   factory _$$AuthErrorStateImplCopyWith(_$AuthErrorStateImpl value,
           $Res Function(_$AuthErrorStateImpl) then) =
       __$$AuthErrorStateImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call(
       {String message,
       LoginViewModel loginViewModel,
       RegisterViewModel registerViewModel});
 
-  @override
   $LoginViewModelCopyWith<$Res> get loginViewModel;
-  @override
   $RegisterViewModelCopyWith<$Res> get registerViewModel;
 }
 
@@ -873,6 +1028,26 @@ class __$$AuthErrorStateImplCopyWithImpl<$Res>
           : registerViewModel // ignore: cast_nullable_to_non_nullable
               as RegisterViewModel,
     ));
+  }
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $LoginViewModelCopyWith<$Res> get loginViewModel {
+    return $LoginViewModelCopyWith<$Res>(_value.loginViewModel, (value) {
+      return _then(_value.copyWith(loginViewModel: value));
+    });
+  }
+
+  /// Create a copy of AuthState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $RegisterViewModelCopyWith<$Res> get registerViewModel {
+    return $RegisterViewModelCopyWith<$Res>(_value.registerViewModel, (value) {
+      return _then(_value.copyWith(registerViewModel: value));
+    });
   }
 }
 
@@ -927,6 +1102,7 @@ class _$AuthErrorStateImpl implements AuthErrorState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() splash,
     required TResult Function(
             LoginViewModel loginViewModel, RegisterViewModel registerViewModel)
         initial,
@@ -946,6 +1122,7 @@ class _$AuthErrorStateImpl implements AuthErrorState {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? splash,
     TResult? Function(
             LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
         initial,
@@ -965,6 +1142,7 @@ class _$AuthErrorStateImpl implements AuthErrorState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? splash,
     TResult Function(
             LoginViewModel loginViewModel, RegisterViewModel registerViewModel)?
         initial,
@@ -988,6 +1166,7 @@ class _$AuthErrorStateImpl implements AuthErrorState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(AuthSplashState value) splash,
     required TResult Function(AuthInitialState value) initial,
     required TResult Function(AuthLoadingState value) loading,
     required TResult Function(AuthSuccessState value) success,
@@ -999,6 +1178,7 @@ class _$AuthErrorStateImpl implements AuthErrorState {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(AuthSplashState value)? splash,
     TResult? Function(AuthInitialState value)? initial,
     TResult? Function(AuthLoadingState value)? loading,
     TResult? Function(AuthSuccessState value)? success,
@@ -1010,6 +1190,7 @@ class _$AuthErrorStateImpl implements AuthErrorState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(AuthSplashState value)? splash,
     TResult Function(AuthInitialState value)? initial,
     TResult Function(AuthLoadingState value)? loading,
     TResult Function(AuthSuccessState value)? success,
@@ -1030,14 +1211,11 @@ abstract class AuthErrorState implements AuthState {
       final RegisterViewModel registerViewModel}) = _$AuthErrorStateImpl;
 
   String get message;
-  @override
   LoginViewModel get loginViewModel;
-  @override
   RegisterViewModel get registerViewModel;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
-  @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AuthErrorStateImplCopyWith<_$AuthErrorStateImpl> get copyWith =>
       throw _privateConstructorUsedError;

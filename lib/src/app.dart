@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:medmate_stt/src/data/datasource/local/auth_local_data_source.dart';
 import 'package:medmate_stt/src/data/datasource/remote/auth_remote_data_source.dart';
+import 'package:medmate_stt/src/data/network/rest_client.dart';
 import 'package:medmate_stt/src/data/repository/auth_repository_impl.dart';
 import 'package:medmate_stt/src/domain/usecase/auth/login_usecase.dart';
 import 'package:medmate_stt/src/domain/usecase/auth/register_usecase.dart';
@@ -13,16 +14,14 @@ import 'package:medmate_stt/src/presentation/cubit/theme/theme_cubit.dart';
 import 'package:medmate_stt/src/presentation/definition/app_theme.dart';
 import 'package:medmate_stt/src/presentation/page/auth/login_page.dart';
 import 'package:medmate_stt/src/presentation/page/dashboard/dashboard_page.dart';
+import 'package:medmate_stt/src/presentation/page/splash/splash_page.dart';
 
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void runMedMateApp() {
-  final remoteDataSource = AuthRemoteDataSource();
-  final localDataSource = AuthLocalDataSource();
-  final repository = AuthRepositoryImpl(
-    remoteDataSource: remoteDataSource,
-    localDataSource: localDataSource,
-  );
+  final remoteDataSource = AuthRemoteDataSourceImpl(RestClient());
+  final localDataSource = AuthLocalDataSourceImpl();
+  final repository = AuthRepositoryImpl(remoteDataSource, localDataSource);
 
   runApp(
     MultiBlocProvider(
@@ -86,6 +85,9 @@ class _RootPage extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        if (state is AuthSplashState) {
+          return const SplashPage();
+        }
         if (state is AuthSuccessState) {
           return DashboardPage(userName: state.fullName);
         }

@@ -1,4 +1,5 @@
 import 'package:fpdart/fpdart.dart';
+import 'package:injectable/injectable.dart';
 import 'package:medmate_stt/src/data/datasource/local/auth_local_data_source.dart';
 import 'package:medmate_stt/src/data/datasource/remote/auth_remote_data_source.dart';
 import 'package:medmate_stt/src/data/model/auth/auth_response_raw.dart';
@@ -11,12 +12,9 @@ import 'package:medmate_stt/src/domain/entity/auth/register_request.dart';
 import 'package:medmate_stt/src/domain/entity/auth/user_profile.dart';
 import 'package:medmate_stt/src/domain/repository/auth_repository.dart';
 
+@Injectable(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
-  AuthRepositoryImpl({
-    required AuthRemoteDataSource remoteDataSource,
-    required AuthLocalDataSource localDataSource,
-  })  : _remoteDataSource = remoteDataSource,
-        _localDataSource = localDataSource;
+  const AuthRepositoryImpl(this._remoteDataSource, this._localDataSource);
 
   final AuthRemoteDataSource _remoteDataSource;
   final AuthLocalDataSource _localDataSource;

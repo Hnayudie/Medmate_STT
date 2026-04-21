@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:medmate_stt/src/presentation/cubit/auth/auth_cubit.dart';
 import 'package:medmate_stt/src/presentation/cubit/auth/auth_state.dart';
+import 'package:medmate_stt/src/presentation/page/auth/view_model/register_view_model.dart';
 import 'package:medmate_stt/src/presentation/widget/auth_screen_scaffold.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -76,7 +77,9 @@ class _RegisterPageState extends State<RegisterPage> {
         }
       },
       builder: (context, state) {
-        final vm = state.registerViewModel;
+        final vm = state is AuthSplashState
+            ? const RegisterViewModel()
+            : (state as dynamic).registerViewModel as RegisterViewModel;
         return AuthScreenScaffold(
           showBackButton: true,
           logoStyle: LogoStyle.iconOnly,

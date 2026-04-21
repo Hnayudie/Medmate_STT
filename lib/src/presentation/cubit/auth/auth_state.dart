@@ -6,6 +6,8 @@ part 'auth_state.freezed.dart';
 
 @freezed
 abstract class AuthState with _$AuthState {
+  factory AuthState.splash() = AuthSplashState;
+
   factory AuthState.initial({
     @Default(LoginViewModel()) LoginViewModel loginViewModel,
     @Default(RegisterViewModel()) RegisterViewModel registerViewModel,

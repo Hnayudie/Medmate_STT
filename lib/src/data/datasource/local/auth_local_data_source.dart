@@ -1,3 +1,4 @@
+import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 const _keyAccessToken = 'access_token';
@@ -5,7 +6,22 @@ const _keyFullName = 'full_name';
 const _keyEmail = 'email';
 const _keyRole = 'role';
 
-class AuthLocalDataSource {
+abstract class AuthLocalDataSource {
+  Future<void> saveSession({
+    required String accessToken,
+    required String fullName,
+    String email = '',
+    String role = '',
+  });
+
+  Future<({String accessToken, String fullName, String email, String role})?> loadSession();
+
+  Future<void> clearSession();
+}
+
+@Injectable(as: AuthLocalDataSource)
+class AuthLocalDataSourceImpl implements AuthLocalDataSource {
+  @override
   Future<void> saveSession({
     required String accessToken,
     required String fullName,
@@ -19,6 +35,7 @@ class AuthLocalDataSource {
     await prefs.setString(_keyRole, role);
   }
 
+  @override
   Future<({String accessToken, String fullName, String email, String role})?> loadSession() async {
     final prefs = await SharedPreferences.getInstance();
     final token = prefs.getString(_keyAccessToken);
@@ -31,6 +48,7 @@ class AuthLocalDataSource {
     );
   }
 
+  @override
   Future<void> clearSession() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(_keyAccessToken);

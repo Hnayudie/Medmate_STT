@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:medmate_stt/src/domain/entity/patient/patient.dart';
+import 'package:medmate_stt/src/domain/entity/patient/patient_mock.dart';
 import 'package:medmate_stt/src/domain/entity/recording/recording.dart';
+import 'package:medmate_stt/src/domain/entity/recording/recording_mock.dart';
+import 'package:medmate_stt/src/domain/entity/todo/todo_task_mock.dart';
 import 'package:medmate_stt/src/presentation/cubit/auth/auth_cubit.dart';
+import 'package:medmate_stt/src/presentation/definition/app_icons.dart';
 import 'package:medmate_stt/src/presentation/page/dashboard/profile_page.dart';
 import 'package:medmate_stt/src/presentation/page/patient/patient_records_page.dart';
-import 'package:medmate_stt/src/presentation/page/todo/all_todo_page.dart';
-import 'package:medmate_stt/src/presentation/page/todo/todo_day_page.dart';
-import 'package:medmate_stt/src/domain/entity/todo/todo_task.dart';
 import 'package:medmate_stt/src/presentation/page/recording/recording_detail_page.dart';
 import 'package:medmate_stt/src/presentation/page/recording/recording_page.dart';
+import 'package:medmate_stt/src/presentation/page/todo/all_todo_page.dart';
+import 'package:medmate_stt/src/presentation/page/todo/todo_day_page.dart';
 import 'package:medmate_stt/src/presentation/widget/sidebar_drawer.dart';
-import 'package:medmate_stt/src/presentation/definition/app_icons.dart';
 
 class DashboardPage extends StatefulWidget {
   const DashboardPage({required this.userName, super.key});

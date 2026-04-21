@@ -1,4 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+import 'package:medmate_stt/src/data/error/error_mapper.dart';
 import 'package:medmate_stt/src/domain/entity/auth/login_request.dart';
 import 'package:medmate_stt/src/domain/entity/auth/register_request.dart';
 import 'package:medmate_stt/src/domain/repository/auth_repository.dart';
@@ -8,6 +10,7 @@ import 'package:medmate_stt/src/presentation/cubit/auth/auth_state.dart';
 import 'package:medmate_stt/src/presentation/page/auth/view_model/login_view_model.dart';
 import 'package:medmate_stt/src/presentation/page/auth/view_model/register_view_model.dart';
 
+@injectable
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit({
     required LoginUseCase loginUseCase,
@@ -22,31 +25,37 @@ class AuthCubit extends Cubit<AuthState> {
   final RegisterUseCase _registerUseCase;
   final AuthRepository _authRepository;
 
+  LoginViewModel get _loginVM =>
+      state is AuthSplashState ? const LoginViewModel() : (state as dynamic).loginViewModel as LoginViewModel;
+
+  RegisterViewModel get _registerVM =>
+      state is AuthSplashState ? const RegisterViewModel() : (state as dynamic).registerViewModel as RegisterViewModel;
+
   Future<void> login({
     required String email,
     required String password,
   }) async {
     emit(AuthState.loading(
       loginViewModel: const LoginViewModel(isLoading: true),
-      registerViewModel: state.registerViewModel,
+      registerViewModel: _registerVM,
     ));
 
     final result = await _loginUseCase(
-      LoginRequest(email: email.trim(), password: password),
+      LoginUseCaseParams(request: LoginRequest(email: email.trim(), password: password)),
     );
 
     result.fold(
       (error) => emit(AuthState.error(
-        message: error.toString(),
-        loginViewModel: LoginViewModel(errorText: error.toString()),
-        registerViewModel: state.registerViewModel,
+        message: ErrorMapper.toMessage(error),
+        loginViewModel: LoginViewModel(errorText: ErrorMapper.toMessage(error)),
+        registerViewModel: _registerVM,
       )),
       (data) => emit(AuthState.success(
         fullName: data.fullName,
         email: data.email,
         role: data.role,
         loginViewModel: LoginViewModel.fromDomain(data),
-        registerViewModel: state.registerViewModel,
+        registerViewModel: _registerVM,
       )),
     );
   }
@@ -58,36 +67,39 @@ class AuthCubit extends Cubit<AuthState> {
     required String confirmPassword,
   }) async {
     emit(AuthState.loading(
-      loginViewModel: state.loginViewModel,
+      loginViewModel: _loginVM,
       registerViewModel: const RegisterViewModel(isLoading: true),
     ));
 
     final result = await _registerUseCase(
-      RegisterRequest(
-        fullName: fullName.trim(),
-        email: email.trim(),
-        password: password,
-        confirmPassword: confirmPassword,
+      RegisterUseCaseParams(
+        request: RegisterRequest(
+          fullName: fullName.trim(),
+          email: email.trim(),
+          password: password,
+          confirmPassword: confirmPassword,
+        ),
       ),
     );
 
     result.fold(
       (error) => emit(AuthState.error(
-        message: error.toString(),
-        loginViewModel: state.loginViewModel,
-        registerViewModel: RegisterViewModel(errorText: error.toString()),
+        message: ErrorMapper.toMessage(error),
+        loginViewModel: _loginVM,
+        registerViewModel: RegisterViewModel(errorText: ErrorMapper.toMessage(error)),
       )),
       (data) => emit(AuthState.success(
         fullName: data.fullName,
         email: data.email,
         role: data.role,
-        loginViewModel: state.loginViewModel,
+        loginViewModel: _loginVM,
         registerViewModel: RegisterViewModel.fromDomain(data),
       )),
     );
   }
 
   Future<void> restoreSession() async {
+    emit(AuthState.splash());
     final session = await _authRepository.getStoredSession();
     if (session != null) {
       emit(AuthState.success(
@@ -95,8 +107,10 @@ class AuthCubit extends Cubit<AuthState> {
         email: session.email,
         role: session.role,
         loginViewModel: LoginViewModel.fromDomain(session),
-        registerViewModel: state.registerViewModel,
+        registerViewModel: const RegisterViewModel(),
       ));
+    } else {
+      emit(AuthState.initial());
     }
   }
 
